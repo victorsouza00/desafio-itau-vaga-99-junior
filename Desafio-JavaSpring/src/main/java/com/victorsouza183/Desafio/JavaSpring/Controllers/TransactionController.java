@@ -5,13 +5,12 @@ import com.victorsouza183.Desafio.JavaSpring.Models.Transaction;
 import com.victorsouza183.Desafio.JavaSpring.Services.TransactionsService;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.OffsetDateTime;
 import java.util.List;
 
 @RestController
 public class TransactionController {
 
-    private TransactionsService transactionsService;
+    private final TransactionsService transactionsService;
 
     public TransactionController(TransactionsService transactionsService) {
         this.transactionsService = transactionsService;
@@ -31,6 +30,9 @@ public class TransactionController {
         return transactionsService.allTransationsInTheLastSeconds(interval);
     }
 
-
+    @GetMapping("/remove-all")
+    public void removeTransactions(){
+        transactionsService.removeAllTransactions();
+    }
 
 }

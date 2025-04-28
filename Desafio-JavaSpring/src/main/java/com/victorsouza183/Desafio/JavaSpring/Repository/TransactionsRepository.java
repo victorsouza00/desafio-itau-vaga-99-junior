@@ -3,9 +3,8 @@ package com.victorsouza183.Desafio.JavaSpring.Repository;
 
 import com.victorsouza183.Desafio.JavaSpring.Exceptions.UnprocessableTransactions;
 import com.victorsouza183.Desafio.JavaSpring.Models.Transaction;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
+
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -16,7 +15,6 @@ import java.util.logging.Logger;
 @Repository
 public class TransactionsRepository {
 
-    private static final org.slf4j.Logger log = LoggerFactory.getLogger(TransactionsRepository.class);
     private final List<Transaction> transactions= new ArrayList<>();
     public final Logger logger = Logger.getLogger(TransactionsRepository.class.getName());
 
@@ -41,4 +39,10 @@ public class TransactionsRepository {
 
         transactions.add(transaction);
     }
+
+    public void removeAllTransactions(){
+        logger.info("Removendo todas as transações");
+        transactions.clear();
+    }
+
 }

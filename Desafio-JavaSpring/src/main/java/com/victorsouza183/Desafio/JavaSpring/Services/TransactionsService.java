@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Service
 public class TransactionsService {
 
-    private TransactionsRepository transactionsRepository;
+    private final TransactionsRepository transactionsRepository;
     private final Logger logger = Logger.getLogger(TransactionsService.class.getName());
 
     public TransactionsService(TransactionsRepository transactionsRepository) {
@@ -35,6 +35,10 @@ public class TransactionsService {
         return getAllTransactions().stream()
                 .filter(transction-> transction.getDataHora().isAfter(pastInterval))
                 .collect(Collectors.toList());
+    }
+
+    public void removeAllTransactions(){
+        transactionsRepository.removeAllTransactions();
     }
 
 }
