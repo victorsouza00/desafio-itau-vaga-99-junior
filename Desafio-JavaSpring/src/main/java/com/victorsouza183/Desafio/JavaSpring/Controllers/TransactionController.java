@@ -3,10 +3,9 @@ package com.victorsouza183.Desafio.JavaSpring.Controllers;
 
 import com.victorsouza183.Desafio.JavaSpring.Models.Transaction;
 import com.victorsouza183.Desafio.JavaSpring.Services.TransactionsService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @RestController
@@ -23,6 +22,13 @@ public class TransactionController {
             @RequestBody Transaction transaction
     ){
         transactionsService.addTransaction(transaction);
+    }
+
+    @GetMapping("/transacoes")
+    public List<Transaction> getEstatistics(
+            @RequestParam Integer interval
+    ){
+        return transactionsService.allTransationsInTheLastSeconds(interval);
     }
 
 

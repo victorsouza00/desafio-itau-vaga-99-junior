@@ -23,6 +23,7 @@ public class TransactionsRepository {
 
 
     public List<Transaction> getTransactions() {
+        logger.info("Iniciando busca por transações");
         return transactions;
     }
 
@@ -40,5 +41,4 @@ public class TransactionsRepository {
 
         transactions.add(transaction);
     }
-
 }
