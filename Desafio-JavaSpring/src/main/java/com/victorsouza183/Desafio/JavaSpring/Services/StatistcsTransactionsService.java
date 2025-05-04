@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class StatistcsTransactionsService {
 
     private final TransactionsRepository transactionsRepository;
     private final TransactionsService transactionsService;
+    public final Logger logger = Logger.getLogger(StatistcsTransactionsService.class.getName());
 
     public StatistcsTransactionsService(TransactionsRepository transactionsRepository, TransactionsService transactionsService) {
         this.transactionsRepository = transactionsRepository;
@@ -21,9 +23,11 @@ public class StatistcsTransactionsService {
     }
 
     public TransactionsStatistcs getStatistcs(Integer interval){
+        logger.info("Buscando estatisticas");
         List<Transaction> lastTransactions = transactionsService.allTransationsInTheLastSeconds(interval);
 
         if (lastTransactions.isEmpty()){
+            logger.info("Sem Transações");
             return new TransactionsStatistcs(
                             0,
                             0,
@@ -35,6 +39,7 @@ public class StatistcsTransactionsService {
         DoubleSummaryStatistics estatisticas = lastTransactions.stream()
                 .mapToDouble(transaction -> transaction.getValue().doubleValue()).summaryStatistics();
 
+        logger.info("Busca concluida");
 
         return  new TransactionsStatistcs(
                 estatisticas.getCount(),
@@ -43,6 +48,4 @@ public class StatistcsTransactionsService {
                 estatisticas.getMin(),
                 estatisticas.getMax());
     }
-
-
 }

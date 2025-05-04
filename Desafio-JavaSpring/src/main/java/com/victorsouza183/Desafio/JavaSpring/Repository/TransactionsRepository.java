@@ -22,6 +22,7 @@ public class TransactionsRepository {
 
     public List<Transaction> getTransactions() {
         logger.info("Iniciando busca por transações");
+        logger.info("Busca concluida");
         return transactions;
     }
 
@@ -38,11 +39,13 @@ public class TransactionsRepository {
         }
 
         transactions.add(transaction);
+        logger.info("Transação concluida");
     }
 
     public void removeAllTransactions(){
-        logger.info("Removendo todas as transações");
+        logger.info("Iniciando remoção de Transactions");
         transactions.clear();
+        logger.info("Transações deletadas");
     }
 
 }
